@@ -11,12 +11,15 @@ namespace Generative
     {
         SKBitmap bitmap;
         float[,] bitmapDensity;
+        SKBitmap brushBitmap;
 
         public Impressionist()
         {
-            bitmap = SKBitmap.Decode(@"C:\Users\oliph\Desktop\tmp\Mike.png");
+            //bitmap = SKBitmap.Decode(@"C:\Users\oliph\Desktop\tmp\Mike.png");
             //bitmap = SKBitmap.Decode(@"C:\Share\OldCode\KungFuFight\Marketplace\Icons\Icon512x512.png");
-            //bitmap = SKBitmap.Decode(@"C:\Share\OldCode\BlockZombies\Marketplace\Promo\Icon512x512.png");
+            bitmap = SKBitmap.Decode(@"C:\Share\OldCode\BlockZombies\Marketplace\Promo\Icon512x512.png");
+
+            brushBitmap = SKBitmap.Decode(@"C:\tmp\Brush.png");
 
             int maxSize = 512;
 
@@ -41,10 +44,15 @@ namespace Generative
             DrawDots(100, 32, 10000, 255, bounds);
             DrawDots(1000, 16, 10000, 255, bounds);
             DrawDots(10000, 8, 10000, alpha, bounds);
-            DrawDots(100000, 0, 8, alpha, bounds);
+            DrawDots(100000, 0, 8, alpha, bounds, useTexture:true);
         }
 
         public void DrawDots(int numDots, float minRadius, float maxRadius, int alpha, SKRect bounds)
+        {
+            DrawDots(numDots, minRadius, maxRadius, alpha, bounds, useTexture: false);
+        }
+
+        public void DrawDots(int numDots, float minRadius, float maxRadius, int alpha, SKRect bounds, bool useTexture)
         {
             Random random = new Random();
 
@@ -86,7 +94,19 @@ namespace Generative
 
                 float radius = density + (density * (-rand + ((float)random.NextDouble() * rand * 2)));
 
-                Canvas.DrawCircle(new SKPoint(bounds.Left + dotX, bounds.Top + dotY), radius * radiusScale, paint);
+                if (useTexture)
+                {
+                    paint.ColorFilter = SKColorFilter.CreateLighting(paint.Color, paint.Color);
+
+                    SKRect destRect = new SKRect(bounds.Left + dotX - (radius * radiusScale), bounds.Top + dotY - (radius * radiusScale),
+                        bounds.Left + dotX + (radius * radiusScale), bounds.Top + dotY + (radius * radiusScale));
+
+                    Canvas.DrawBitmap(brushBitmap, destRect, paint);
+                }
+                else
+                {
+                    Canvas.DrawCircle(new SKPoint(bounds.Left + dotX, bounds.Top + dotY), radius * radiusScale, paint);
+                }
             }
         }
 

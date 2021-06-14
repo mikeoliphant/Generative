@@ -23,14 +23,15 @@ namespace Generative
     /// </summary>
     public partial class MainWindow : Window
     {
-        BoundsPainter drawing = new StainedGlass();
+        //BoundsPainter drawing = new StainedGlass();
         //BoundsPainter drawing = new Impressionist();
+        BoundsPainter drawing = new SinStripes();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            //SavePng(2048, 2048);
+            //SavePng(800, 800);
         }
 
         void SavePng(int width, int height)
