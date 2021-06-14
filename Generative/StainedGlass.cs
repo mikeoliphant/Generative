@@ -9,8 +9,6 @@ namespace Generative
 {
     public class StainedGlass : BoundsPainter
     {
-		SKColor[] colors = new SKColor[] { SKColors.Yellow, SKColors.Red, SKColors.Green, SKColors.Blue };
-
 		public override void Paint(SKRect bounds)
 		{
 			SKRect drawRect = new SKRect(bounds.Left + (bounds.Width * 0.1f), bounds.Top + (bounds.Height * 0.1f), bounds.Left + (bounds.Width * 0.9f), bounds.Height * 0.9f);
@@ -24,6 +22,8 @@ namespace Generative
 
         public void DoPaint(SKRect bounds)
         {
+			SKColor[] colors = Palette.Pastel;
+
 			float minBound = Math.Min(bounds.Width, bounds.Height);
 
 			SKPaint paint = new SKPaint

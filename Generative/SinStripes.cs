@@ -9,9 +9,14 @@ namespace Generative
 {
     public class SinStripes : BoundsPainter
     {
-        SKColor[] colors = new SKColor[] { SKColor.Parse("#220022"), SKColor.Parse("#334455"), SKColor.Parse("#779988"), SKColor.Parse("#ffffdd") };
-
         public override void Paint(SKRect bounds)
+        {
+            //DrawStripes(bounds, .4f, Palette.Pastel, doOutline: true);
+            //DrawStripes(bounds, .7f, Palette.Sunset, doOutline: true);
+            DrawStripes(bounds, 0.15f, Palette.ColdGB, doOutline: true);
+        }
+
+        void DrawStripes(SKRect bounds, float sinDelta, SKColor[] colors, bool doOutline)
         {
             SKPaint paint = new SKPaint
             {
@@ -32,11 +37,20 @@ namespace Generative
 
             float x = bounds.Left;
             float sinOffset = 0;
-            float sinDelta = 0.12f;
 
             for (int i = 0; i < numPoints; i++)
             {
                 SKPath path = GenerateSinPath(x, bounds.Top, bounds.Bottom, sinOffset, 5, 100);
+
+                if (doOutline)
+                {
+                    paint.Color = SKColors.Black;
+                    paint.StrokeWidth = 55;
+
+                    Canvas.DrawPath(path, paint);
+
+                    paint.StrokeWidth = 50;
+                }
 
                 paint.Color = colors[i % colors.Length];
 

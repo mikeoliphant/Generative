@@ -31,7 +31,7 @@ namespace Generative
         {
             InitializeComponent();
 
-            //SavePng(800, 800);
+            SavePng(800, 800);
         }
 
         void SavePng(int width, int height)

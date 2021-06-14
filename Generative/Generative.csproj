@@ -110,6 +110,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Palette.cs" />
     <Compile Include="SinStripes.cs" />
     <Compile Include="StainedGlass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
