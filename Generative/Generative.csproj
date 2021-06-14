@@ -102,6 +102,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Arcs.cs" />
     <Compile Include="BoundsPainter.cs" />
     <Compile Include="Impressionist.cs" />
     <Compile Include="MainWindow.xaml.cs">

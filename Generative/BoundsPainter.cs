@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using SkiaSharp;
 
 namespace Generative
@@ -18,6 +15,28 @@ namespace Generative
 
         public virtual void Paint(SKRect bounds)
         {
+        }
+
+        public void SavePng(string savePath, int width, int height)
+        {
+            SKBitmap bitmap = new SKBitmap(width, height);
+
+            SKCanvas pngCanvas = new SKCanvas(bitmap);
+
+            pngCanvas.Clear(SKColors.White);
+
+            SetCanvas(pngCanvas);
+            Paint(new SKRect(0, 0, width, height));
+
+            pngCanvas.Flush();
+
+            SKData data = bitmap.Encode(SKEncodedImageFormat.Png, 80);
+
+            using (var stream = File.Create(savePath))
+            {
+                // save the data to a stream
+                data.SaveTo(stream);
+            }
         }
     }
 }
