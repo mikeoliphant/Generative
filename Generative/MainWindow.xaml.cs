@@ -23,10 +23,10 @@ namespace Generative
 
             //drawing.SavePng(@"C:\tmp\test.png", 800, 800);
 
-            for (int i = 0; i < 10; i++)
-            {
-                drawing.SavePng(@"C:\tmp\test" + i + ".png", 2048, 2048);
-            }
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    drawing.SavePng(@"C:\tmp\test" + i + ".png", 2048, 2048);
+            //}
         }
 
         private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
