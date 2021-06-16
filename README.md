@@ -4,9 +4,9 @@ Here are some renders:
 
 # Ribbons
 <p float="left">
-  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/RibbonsPastel.png" width="300" />
-  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/RibbonsColdGB.png" width="300" /> 
-  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/RibbonsSunset.png" width="300" />
+  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/RibbonsPastel.png" width="400" />
+  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/RibbonsColdGB.png" width="400" /> 
+  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/RibbonsSunset.png" width="400" />
 </p>
 
 # Stained Glass
