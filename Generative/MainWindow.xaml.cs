@@ -11,9 +11,9 @@ namespace Generative
     public partial class MainWindow : Window
     {
         //BoundsPainter drawing = new StainedGlass();
-        //BoundsPainter drawing = new Impressionist();
+        BoundsPainter drawing = new Impressionist();
         //BoundsPainter drawing = new SinStripes();
-        BoundsPainter drawing = new BrokenCircle();
+        //BoundsPainter drawing = new BrokenCircle();
         //BoundsPainter drawing = new Threads();
 
         public MainWindow()

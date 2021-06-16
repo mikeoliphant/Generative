@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using System.Net;
+using System.Reflection;
 using SkiaSharp;
 
 namespace Generative
@@ -11,11 +14,9 @@ namespace Generative
 
         public Impressionist()
         {
-            //bitmap = SKBitmap.Decode(@"C:\Users\oliph\Desktop\tmp\Mike.png");
-            //bitmap = SKBitmap.Decode(@"C:\Share\OldCode\KungFuFight\Marketplace\Icons\Icon512x512.png");
-            bitmap = SKBitmap.Decode(@"C:\Share\OldCode\BlockZombies\Marketplace\Promo\Icon512x512.png");
+            bitmap = BitmapFromURL("https://pbs.twimg.com/profile_images/1474838354/KungFu128x128_400x400.png");
 
-            brushBitmap = SKBitmap.Decode(@"C:\tmp\Brush.png");
+            brushBitmap = BitmapFromResource("Generative.Images.Brush.png");
 
             int maxSize = 512;
 
@@ -32,6 +33,32 @@ namespace Generative
             bitmapDensity = GetBitmapDensity(bitmap);
         }
 
+        SKBitmap BitmapFromURL(string url)
+        {
+            SKBitmap bitmap = null;
+
+            using (WebClient webClient = new WebClient())
+            {
+                bitmap = SKBitmap.Decode(webClient.DownloadData(url));
+            }
+
+            return bitmap;
+        }
+
+        SKBitmap BitmapFromResource(string resourceID)
+        {
+            SKBitmap bitmap = null;
+
+            Assembly assembly = GetType().GetTypeInfo().Assembly;
+
+            using (Stream stream = assembly.GetManifestResourceStream(resourceID))
+            {
+                bitmap = SKBitmap.Decode(stream);
+            }
+
+            return bitmap;
+        }
+
         public override void Paint(SKRect bounds)
         {
             int alpha = 128;
@@ -40,7 +67,7 @@ namespace Generative
             DrawDots(100, 32, 10000, 255, bounds);
             DrawDots(1000, 16, 10000, 255, bounds);
             DrawDots(10000, 8, 10000, alpha, bounds);
-            DrawDots(100000, 0, 8, alpha, bounds, useTexture:true);
+            DrawDots(100000, 0, 8, alpha, bounds, useTexture: true);
         }
 
         public void DrawDots(int numDots, float minRadius, float maxRadius, int alpha, SKRect bounds)
