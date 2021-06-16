@@ -20,12 +20,11 @@ namespace Generative
             {
                 Color = SKColors.Black,
                 IsAntialias = true,
-                Style = SKPaintStyle.Stroke,
-                
+                Style = SKPaintStyle.Stroke,                
                 StrokeWidth = 1.5f,
             };
 
-            int numFlows = 10000;
+            int numFlows = 20000;
             int numThreads = 10;
 
             for (int i = 0; i < numFlows; i++)
