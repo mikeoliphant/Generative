@@ -3,11 +3,13 @@ using SkiaSharp;
 
 namespace Generative
 {
-    public class Arcs : BoundsPainter
+    public class BrokenCircle : BoundsPainter
     {
         public override void Paint(SKRect bounds)
         {
             SKColor[] colors = Palette.Pastel;
+
+            Canvas.Clear(SKColors.AntiqueWhite);
 
             int numRings = 35;
 
