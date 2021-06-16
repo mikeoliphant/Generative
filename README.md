@@ -9,6 +9,14 @@ Here are some renders:
   <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/RibbonsSunset.png" width="400" />
 </p>
 
+# Hair
+<p float="left">
+  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/Hair1.png" width="400" />
+  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/Hair2.png" width="400" /> 
+  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/Hair3.png" width="400" />
+  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/Hair4.png" width="400" />
+</p>
+
 # Stained Glass
 <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/StainedGlass.png" width="600" />
 
