@@ -7,9 +7,9 @@ namespace Generative
     {
         public override void Paint(SKRect bounds)
         {
-            //DrawStripes(bounds, .4f, Palette.Pastel, doOutline: true);
+            DrawStripes(bounds, .4f, Palette.Pastel, doOutline: true);
             //DrawStripes(bounds, .7f, Palette.Sunset, doOutline: true);
-            DrawStripes(bounds, 0.15f, Palette.ColdGB, doOutline: true);
+            //DrawStripes(bounds, 0.15f, Palette.ColdGB, doOutline: true);
         }
 
         void DrawStripes(SKRect bounds, float sinDelta, SKColor[] colors, bool doOutline)

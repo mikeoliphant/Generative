@@ -97,6 +97,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Squiggles.cs" />
     <Compile Include="Hair.cs" />
     <Compile Include="Threads.cs" />
     <Page Include="MainWindow.xaml">
