@@ -32,16 +32,14 @@ namespace Generative
             float minRetract = 5;
             float randRetract = 50;
 
-            Random random = new Random();
-
             for (int i = 0; i < numRings; i++)
             {
                 paint.Color = colors[i % colors.Length];
 
-                float upperLeftRetract = minRetract + (float)random.NextDouble() * randRetract;
-                float upperRightRetract = minRetract + (float)random.NextDouble() * randRetract;
-                float lowerLeftRetract = minRetract + (float)random.NextDouble() * randRetract;
-                float lowerRightRetract = minRetract + (float)random.NextDouble() * randRetract;
+                float upperLeftRetract = minRetract + (float)Random.NextDouble() * randRetract;
+                float upperRightRetract = minRetract + (float)Random.NextDouble() * randRetract;
+                float lowerLeftRetract = minRetract + (float)Random.NextDouble() * randRetract;
+                float lowerRightRetract = minRetract + (float)Random.NextDouble() * randRetract;
 
                 Canvas.DrawArc(new SKRect(bounds.MidX - radius, bounds.MidY - radius, bounds.MidX + radius, bounds.MidY + radius),
                     lowerRightRetract, 180 - lowerRightRetract - lowerLeftRetract, false, paint);

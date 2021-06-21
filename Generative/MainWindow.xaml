@@ -8,6 +8,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="800">
     <Grid>
-        <skia:SKElement PaintSurface="OnPaintSurface" />
+        <skia:SKElement x:Name="SkiaCanvas" PaintSurface="OnPaintSurface" Focusable="True" KeyDown="SKElement_KeyDown" />
     </Grid>
 </Window>

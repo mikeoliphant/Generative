@@ -16,11 +16,13 @@ namespace Generative
         //BoundsPainter drawing = new BrokenCircle();
         //BoundsPainter drawing = new Threads();
         //BoundsPainter drawing = new Hair();
-        BoundsPainter drawing = new Squiggles();
+        BoundsPainter drawing = new Tendrils();
 
         public MainWindow()
         {
             InitializeComponent();
+
+            SkiaCanvas.Focus();
 
             //drawing.SavePng(@"C:\tmp\test.png", 800, 800);
 
@@ -41,12 +43,20 @@ namespace Generative
 
             canvas.Clear(SKColors.White);
 
+            drawing.RandomSeed = (int)(DateTime.Now.Ticks % uint.MaxValue);
+
             drawing.SetCanvas(canvas);
             drawing.Paint(new SKRect(0, 0, scaledSize.Width, scaledSize.Height));
         }
 
-        void RenderAll()
+        private void SKElement_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
+            switch (e.Key)
+            {
+                case System.Windows.Input.Key.F5:
+                    SkiaCanvas.InvalidateVisual();
+                    break;
+            }
         }
     }
 }

@@ -5,8 +5,6 @@ namespace Generative
 {
     public class Threads : BoundsPainter
     {
-        Random random = new Random();
-
         public override void Paint(SKRect bounds)
         {
             SKPaint paint = new SKPaint
@@ -28,7 +26,7 @@ namespace Generative
             {
                 SKPath threadPath = CreateThreadPath(path, 100, 2, 20);
 
-                float darkness = (float)(random.NextDouble() * 0.5);
+                float darkness = (float)(Random.NextDouble() * 0.5);
 
                 paint.Color = new SKColor((byte)(darkness * 255), (byte)(darkness * 255), (byte)(darkness * 255));
 
@@ -45,14 +43,14 @@ namespace Generative
             float pathDelta = measure.Length / (float)numPoints;
 
             float pathDistance = 0;
-            float tangentDev = -maxDev + (float)(random.NextDouble() * maxDev * 2);
+            float tangentDev = -maxDev + (float)(Random.NextDouble() * maxDev * 2);
 
             for (int i = 0; i <= numPoints; i++)
             {
                 SKPoint pathPoint = measure.GetPosition(pathDistance);
                 SKPoint pathTangent = measure.GetTangent(pathDistance);
 
-                tangentDev += -deltaDev + (float)(random.NextDouble() * deltaDev * 2);
+                tangentDev += -deltaDev + (float)(Random.NextDouble() * deltaDev * 2);
 
                 if (tangentDev > maxDev)
                     tangentDev = maxDev;

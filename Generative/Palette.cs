@@ -14,5 +14,9 @@ namespace Generative
         public static SKColor[] RainbowMuted = new SKColor[] { SKColor.Parse("e6261f"), SKColor.Parse("eb7532"), SKColor.Parse("f7d038"), SKColor.Parse("a3e048"), SKColor.Parse("49da9a"), SKColor.Parse("34bbe6"), SKColor.Parse("4355db"), SKColor.Parse("d23be7") };
         public static SKColor[] CandyCane = new SKColor[] { SKColor.Parse("FF4747"), SKColor.Parse("FFE6E6") };
         public static SKColor[] BarberPole = new SKColor[] { SKColor.Parse("E24C3B"), SKColor.Parse("FBF3EF"), SKColor.Parse("0088E0"), SKColor.Parse("FBF3EF") };
+        public static SKColor[] Seventies = new SKColor[] { SKColor.Parse("75c8ae"), SKColor.Parse("5a3d2b"), SKColor.Parse("ffecb4"), SKColor.Parse("e5771e"), SKColor.Parse("f4a127") };
+        public static SKColor[] SeventiesBright = new SKColor[] { SKColor.Parse("f5c600"), SKColor.Parse("d8460b"), SKColor.Parse("c21703"), SKColor.Parse("9b4923"), SKColor.Parse("007291") };
+        public static SKColor[] Vibrant = new SKColor[] { SKColor.Parse("FFBE0B"), SKColor.Parse("FB5607"), SKColor.Parse("FF006E"), SKColor.Parse("8338EC"), SKColor.Parse("3A86FF") };
+        public static SKColor[] Neaplolitan = new SKColor[] { SKColor.Parse("ff8daa"), SKColor.Parse("fdaeae"), SKColor.Parse("f6e2b3"), SKColor.Parse("b49982"), SKColor.Parse("7e6651") };
     }
 }

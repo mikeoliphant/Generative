@@ -5,14 +5,13 @@ namespace Generative
 {
     public class Hair : BoundsPainter
     {
-        Random random = new Random();
         LibNoise.Primitive.SimplexPerlin perlin = new LibNoise.Primitive.SimplexPerlin();
         float noiseScale = 1;
         SKColor[] colors = Palette.Pastel;
 
         public override void Paint(SKRect bounds)
         {
-            perlin.Seed = (int)(DateTime.Now.Ticks % uint.MaxValue);
+            perlin.Seed = Random.Next(int.MaxValue);
 
             bounds = new SKRect(bounds.Left - (bounds.Width * 0.1f), bounds.Top - (bounds.Height * 0.1f), bounds.Right + (bounds.Width * 0.1f), bounds.Bottom + (bounds.Height * 0.1f));
 
@@ -29,10 +28,10 @@ namespace Generative
 
             for (int i = 0; i < numFlows; i++)
             {
-                float x = (float)random.NextDouble();
-                float y = (float)random.NextDouble();
+                float x = (float)Random.NextDouble();
+                float y = (float)Random.NextDouble();
 
-                float length = 0.05f + (float)random.NextDouble() * 0.3f;
+                float length = 0.05f + (float)Random.NextDouble() * 0.3f;
 
                 SKPath flowPath = CreateFlowPath(x, y, bounds, length, 20);
 
@@ -44,7 +43,7 @@ namespace Generative
                 {
                     SKPath threadPath = CreateThreadPath(flowPath, 20, 0.5f, 50);
 
-                    float darkness = .1f + (float)(random.NextDouble() * 0.75);
+                    float darkness = .1f + (float)(Random.NextDouble() * 0.75);
 
                     paint.Color = new SKColor((byte)(darkness * baseColor.Red), (byte)(darkness * baseColor.Green), (byte)(darkness * baseColor.Blue), 100);
 
@@ -89,14 +88,14 @@ namespace Generative
             float pathDelta = measure.Length / (float)numPoints;
 
             float pathDistance = 0;
-            float tangentDev = -maxDev + (float)(random.NextDouble() * maxDev * 2);
+            float tangentDev = -maxDev + (float)(Random.NextDouble() * maxDev * 2);
 
             for (int i = 0; i <= numPoints; i++)
             {
                 SKPoint pathPoint = measure.GetPosition(pathDistance);
                 SKPoint pathTangent = measure.GetTangent(pathDistance);
 
-                tangentDev += -deltaDev + (float)(random.NextDouble() * deltaDev * 2);
+                tangentDev += -deltaDev + (float)(Random.NextDouble() * deltaDev * 2);
 
                 if (tangentDev > maxDev)
                     tangentDev = maxDev;

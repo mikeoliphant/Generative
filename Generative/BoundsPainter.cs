@@ -7,6 +7,24 @@ namespace Generative
     public class BoundsPainter
     {
         public SKCanvas Canvas { get; private set; }
+        public Random Random { get; set; }
+
+        int randomSeed;
+        public int RandomSeed
+        {
+            get => randomSeed;
+            set
+            {
+                randomSeed = value;
+                Random = new Random(randomSeed);
+            }
+        }
+
+        public BoundsPainter()
+        {
+            RandomSeed = (int)(DateTime.Now.Ticks % uint.MaxValue);
+            Random = new Random(RandomSeed);
+        }
 
         public void SetCanvas(SKCanvas canvas)
         {
