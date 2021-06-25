@@ -5,9 +5,11 @@ namespace Generative
 {
     public class Tendrils : BoundsPainter
     {
+        public float NoiseXOffset { get; set; }
+        public float NoiseYOffset { get; set; }
+        public float NoiseScale { get; set; }
+
         LibNoise.Primitive.SimplexPerlin perlin = new LibNoise.Primitive.SimplexPerlin();
-        float noiseScale = 1;
-        float noiseOffset = 0;
         SKColor[] colors = Palette.Vibrant;
         int numSegments = 200;
         float lineLength = 2.0f;
@@ -28,11 +30,15 @@ namespace Generative
 
         public Tendrils()
         {
+            NoiseXOffset = 0;
+            NoiseYOffset = 0;
+            NoiseScale = 1;
         }
 
         public override void Paint(SKRect bounds)
         {
             Canvas.Clear(new SKColor(50, 50, 100));
+            //Canvas.Clear(new SKColor(80, 120, 200));
 
             perlin.Seed = Random.Next(int.MaxValue);
 
@@ -86,7 +92,7 @@ namespace Generative
 
             for (int i = 0; i < numSegments; i++)
             {
-                float noise = perlin.GetValue((x + noiseOffset) * noiseScale, (y + noiseOffset) * noiseScale);
+                float noise = perlin.GetValue((x + NoiseXOffset) * NoiseScale, (y + NoiseYOffset) * NoiseScale);
 
                 float angle = noise * (float)Math.PI * 2;
 

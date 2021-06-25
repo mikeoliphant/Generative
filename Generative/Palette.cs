@@ -18,5 +18,6 @@ namespace Generative
         public static SKColor[] SeventiesBright = new SKColor[] { SKColor.Parse("f5c600"), SKColor.Parse("d8460b"), SKColor.Parse("c21703"), SKColor.Parse("9b4923"), SKColor.Parse("007291") };
         public static SKColor[] Vibrant = new SKColor[] { SKColor.Parse("FFBE0B"), SKColor.Parse("FB5607"), SKColor.Parse("FF006E"), SKColor.Parse("8338EC"), SKColor.Parse("3A86FF") };
         public static SKColor[] Neaplolitan = new SKColor[] { SKColor.Parse("ff8daa"), SKColor.Parse("fdaeae"), SKColor.Parse("f6e2b3"), SKColor.Parse("b49982"), SKColor.Parse("7e6651") };
+        public static SKColor[] Seaweed = new SKColor[] { SKColor.Parse("0B7B8B"), SKColor.Parse("20B0AA"), SKColor.Parse("9EE2BE"), SKColor.Parse("6EBB7F"), SKColor.Parse("4A9A64") };
     }
 }

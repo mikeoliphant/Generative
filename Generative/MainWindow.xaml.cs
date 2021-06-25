@@ -10,13 +10,14 @@ namespace Generative
     /// </summary>
     public partial class MainWindow : Window
     {
-        //BoundsPainter drawing = new StainedGlass();
-        //BoundsPainter drawing = new Impressionist();
-        //BoundsPainter drawing = new Ribbons();
-        //BoundsPainter drawing = new BrokenCircle();
-        //BoundsPainter drawing = new Threads();
-        //BoundsPainter drawing = new Hair();
-        BoundsPainter drawing = new Tendrils();
+        //StainedGlass drawing = new StainedGlass();
+        //Impressionist drawing = new Impressionist();
+        //Ribbons drawing = new Ribbons();
+        //BrokenCircle drawing = new BrokenCircle();
+        //Threads drawing = new Threads();
+        //Hair drawing = new Hair();
+        //Tendrils drawing = new Tendrils();
+        FlowPainter drawing = new FlowPainter();
 
         public MainWindow()
         {
@@ -24,11 +25,9 @@ namespace Generative
 
             SkiaCanvas.Focus();
 
-            //drawing.SavePng(@"C:\tmp\test.png", 800, 800);
-
             //for (int i = 0; i < 10; i++)
             //{
-            //    drawing.SavePng(@"C:\tmp\test" + i + ".png", 2048, 2048);
+            //    drawing.SavePng(@"c:\tmp\test" + i + ".png", 1070, 800);
             //}
         }
 
