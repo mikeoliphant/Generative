@@ -9,6 +9,12 @@ Here are some renders:
   <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/RibbonsSunset.png" width="400" />
 </p>
 
+# Tendrils
+<p float="left">
+  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/Tendrils1.png" width="400" />
+  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/Tendrils2.png" width="400" /> 
+</p>
+
 # Hair
 <p float="left">
   <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/Hair1.png" width="400" />
