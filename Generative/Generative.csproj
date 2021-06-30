@@ -99,6 +99,7 @@
     </ApplicationDefinition>
     <Compile Include="ImageUtil.cs" />
     <Compile Include="FlowPainter.cs" />
+    <Compile Include="ColorSubdivisions.cs" />
     <Compile Include="Tendrils.cs" />
     <Compile Include="Hair.cs" />
     <Compile Include="Threads.cs" />

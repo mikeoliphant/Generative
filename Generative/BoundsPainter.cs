@@ -8,6 +8,7 @@ namespace Generative
     {
         public SKCanvas Canvas { get; private set; }
         public Random Random { get; set; }
+        public float DesiredAspectRatio { get; set; }
 
         int randomSeed;
         public int RandomSeed
@@ -24,6 +25,7 @@ namespace Generative
         {
             RandomSeed = (int)(DateTime.Now.Ticks % uint.MaxValue);
             Random = new Random(RandomSeed);
+            DesiredAspectRatio = 1;
         }
 
         public void SetCanvas(SKCanvas canvas)

@@ -17,17 +17,21 @@ namespace Generative
         //Threads drawing = new Threads();
         //Hair drawing = new Hair();
         //Tendrils drawing = new Tendrils();
-        FlowPainter drawing = new FlowPainter();
+        //FlowPainter drawing = new FlowPainter();
+        ColorSubdivisions drawing = new ColorSubdivisions();
 
         public MainWindow()
         {
             InitializeComponent();
 
+            Height = 800;
+            Width = 800 * drawing.DesiredAspectRatio;
+
             SkiaCanvas.Focus();
 
             //for (int i = 0; i < 10; i++)
             //{
-            //    drawing.SavePng(@"c:\tmp\test" + i + ".png", 1070, 800);
+            //    drawing.SavePng(@"c:\tmp\test" + i + ".png", (int)Width, (int)Height);
             //}
         }
 

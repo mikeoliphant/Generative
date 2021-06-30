@@ -34,6 +34,61 @@ namespace Generative
             return bitmap;
         }
 
+        public static float GetColorError(SKBitmap bitmap, SKRectI bounds, SKColor referenceColor, float maxErrPerPixel)
+        {
+            float rh;
+            float rs;
+            float rv;
+
+            referenceColor.ToHsv(out rh, out rs, out rv);
+
+            rh /= 360;
+            rs /= 100;
+            rv /= 100;
+
+            int numPixels = bounds.Width * bounds.Height;
+
+            float totErr = 0;
+            float maxErr;
+
+            maxErr = numPixels * maxErrPerPixel;
+
+            for (int x = bounds.Left; x < bounds.Right; x++)
+            {
+                for (int y = bounds.Top; y < bounds.Bottom; y++)
+                {
+                    SKColor color = bitmap.GetPixel(x, y);
+
+                    float h;
+                    float s;
+                    float v;
+
+                    color.ToHsv(out h, out s, out v);
+
+                    h /= 360;
+                    s /= 100;
+                    v /= 100;
+
+                    float hErr = Math.Abs(h - rh);
+                    if (hErr > 0.5f)
+                        hErr -= 0.5f;
+
+                    float sErr = Math.Abs(s - rs);
+
+                    float vErr = Math.Abs(v - rv);
+
+                    float err = (hErr + sErr + vErr) / 3;
+
+                    totErr += err;
+
+                    if (totErr > maxErr)
+                        break;
+                }
+            }
+
+            return totErr / numPixels;
+        }
+
         public static float[,] GetBitmapDensity(SKBitmap bitmap)
         {
             float[,] densityData = new float[bitmap.Width, bitmap.Height];
@@ -97,7 +152,6 @@ namespace Generative
                                 float err = (hErr + sErr + vErr) / 3;
 
                                 totErr += err;
-
 
                                 if (totErr > maxErr)
                                     break;
