@@ -100,9 +100,11 @@
     <Compile Include="ImageUtil.cs" />
     <Compile Include="FlowPainter.cs" />
     <Compile Include="ColorSubdivisions.cs" />
+    <Compile Include="PathUtils.cs" />
     <Compile Include="Tendrils.cs" />
     <Compile Include="Hair.cs" />
     <Compile Include="Threads.cs" />
+    <Compile Include="Canvasify.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

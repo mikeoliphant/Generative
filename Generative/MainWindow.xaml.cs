@@ -18,7 +18,8 @@ namespace Generative
         //Hair drawing = new Hair();
         //Tendrils drawing = new Tendrils();
         //FlowPainter drawing = new FlowPainter();
-        ColorSubdivisions drawing = new ColorSubdivisions();
+        //ColorSubdivisions drawing = new ColorSubdivisions();
+        Canvasify drawing = new Canvasify();
 
         public MainWindow()
         {

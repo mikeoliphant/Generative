@@ -20,7 +20,7 @@ namespace Generative
 
         public ColorSubdivisions()
         {
-            colorBitmap = ImageUtil.BitmapFromURL("https://media.istockphoto.com/photos/beautiful-sunset-over-the-tropical-sea-picture-id1172427455?k=6&m=1172427455&s=612x612&w=0&h=yGHpsUyZTE15UPI2pRTkDUnZzLAciyV6Sl2Ieh2QMW4=");
+            colorBitmap = ImageUtil.BitmapFromURL("https://cdn.lifestyleasia.com/wp-content/uploads/sites/3/2020/11/16190957/photo-1543349689-9a4d426bee8e-1243x900.jpeg");
 
             int maxSize = 512;
 
@@ -34,7 +34,7 @@ namespace Generative
                 colorBitmap = colorBitmap.Resize(new SKImageInfo((int)(colorBitmap.Width * scale), (int)(colorBitmap.Height * scale)), SKFilterQuality.High);
             }
 
-            colorSubdivider = new ColorSubdivider(colorBitmap, 0.04f);
+            colorSubdivider = new ColorSubdivider(colorBitmap, 0.03f);
 
             DesiredAspectRatio = (float)colorBitmap.Width / (float)colorBitmap.Height;
         }
