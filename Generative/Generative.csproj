@@ -97,6 +97,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Noodling.cs" />
     <Compile Include="ImageUtil.cs" />
     <Compile Include="FlowPainter.cs" />
     <Compile Include="ColorSubdivisions.cs" />

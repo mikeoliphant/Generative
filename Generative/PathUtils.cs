@@ -40,5 +40,37 @@ namespace Generative
 
             return threadPath;
         }
+
+        public static SKPath NoisifyPath(SKPath basePath, LibNoise.Primitive.SimplexPerlin perlin, float noiseScale, int numPoints, float minDev, float maxDev)
+        {
+            SKPath noisedPath = new SKPath();
+
+            SKPathMeasure measure = new SKPathMeasure(basePath);
+
+            float pathDelta = measure.Length / (float)numPoints;
+
+            float pathDistance = 0;
+
+            float totDev = maxDev - minDev;
+
+            for (int i = 0; i <= numPoints + 1; i++)
+            {
+                SKPoint pathPoint = measure.GetPosition(pathDistance);
+                SKPoint pathTangent = measure.GetTangent(pathDistance);
+
+                float tangentAmount = minDev + (((perlin.GetValue(pathPoint.X * noiseScale, pathPoint.Y * noiseScale) + 1) / 2) * totDev);
+
+                pathPoint = new SKPoint(pathPoint.X + (-pathTangent.Y * tangentAmount), pathPoint.Y + (pathTangent.X * tangentAmount));
+
+                if (i == 0)
+                    noisedPath.MoveTo(pathPoint);
+                else
+                    noisedPath.LineTo(pathPoint);
+
+                pathDistance += pathDelta;
+            }
+
+            return noisedPath;
+        }
     }
 }

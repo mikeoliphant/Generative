@@ -19,7 +19,8 @@ namespace Generative
         //Tendrils drawing = new Tendrils();
         //FlowPainter drawing = new FlowPainter();
         //ColorSubdivisions drawing = new ColorSubdivisions();
-        Canvasify drawing = new Canvasify();
+        //Canvasify drawing = new Canvasify();
+        Noodling drawing = new Noodling();
 
         public MainWindow()
         {
@@ -34,6 +35,8 @@ namespace Generative
             //{
             //    drawing.SavePng(@"c:\tmp\test" + i + ".png", (int)Width, (int)Height);
             //}
+
+            //drawing.SavePng(@"c:\tmp\test.png", (int)Width, (int)Height);
         }
 
         private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)

@@ -72,6 +72,18 @@ namespace Generative
 
                 Canvas.DrawPath(path, paint);
             }
+
+            //SKPath borderPath = new SKPath();
+
+            //borderPath.AddRoundRect(new SKRoundRect(bounds, 20));
+
+            //LibNoise.Primitive.SimplexPerlin perlin = new LibNoise.Primitive.SimplexPerlin();
+            //perlin.Seed = Random.Next(int.MaxValue);
+
+            //borderPath = PathUtils.NoisifyPath(borderPath, perlin, 0.07f, 10000, -5, 5);
+
+            //Canvas.DrawPath(borderPath, new SKPaint { Color = SKColors.White, StrokeWidth = 20, IsAntialias = true, Style = SKPaintStyle.Stroke });
+
         }
     }
 }
