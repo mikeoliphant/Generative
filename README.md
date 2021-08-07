@@ -32,6 +32,15 @@ Brush strokes following a Perlin noise flow field with colors sampled from an im
   <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/FlowPastoral2.png" width="400" />
 </p>
 
+# [TieDye](https://github.com/mikeoliphant/Generative/blob/master/Generative/TieDye.cs)
+
+Another experiment with Perlin flow lines.
+
+<p float="left">
+  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/TieDye1.png" width="400" />
+  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/TieDye2.png" width="400" /> 
+</p>
+
 # [Hair](https://github.com/mikeoliphant/Generative/blob/master/Generative/Hair.cs)
 
 Lines following a Perlin noise field with colors from a palette taken from the same noise.
