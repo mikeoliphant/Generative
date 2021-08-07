@@ -4,7 +4,7 @@ using SkiaSharp;
 
 namespace Generative
 {
-    public class TieDie : BoundsPainter
+    public class TieDye : BoundsPainter
     {
         public float NoiseXOffset { get; set; }
         public float NoiseYOffset { get; set; }
@@ -24,7 +24,7 @@ namespace Generative
             StrokeWidth = 1
         };
 
-        public TieDie()
+        public TieDye()
         {
             NoiseXOffset = 0;
             NoiseYOffset = 0;
