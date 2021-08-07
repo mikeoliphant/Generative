@@ -32,10 +32,10 @@ namespace Generative
 
             SkiaCanvas.Focus();
 
-            for (int i = 0; i < 10; i++)
-            {
-                drawing.SavePng(@"c:\tmp\test" + i + ".png", (int)Width, (int)Height);
-            }
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    drawing.SavePng(@"c:\tmp\test" + i + ".png", (int)Width, (int)Height);
+            //}
 
             //drawing.SavePng(@"c:\tmp\test.png", (int)Width, (int)Height);
         }
