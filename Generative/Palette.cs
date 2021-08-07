@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using SkiaSharp;
 
 namespace Generative
@@ -19,5 +20,30 @@ namespace Generative
         public static SKColor[] Vibrant = new SKColor[] { SKColor.Parse("FFBE0B"), SKColor.Parse("FB5607"), SKColor.Parse("FF006E"), SKColor.Parse("8338EC"), SKColor.Parse("3A86FF") };
         public static SKColor[] Neaplolitan = new SKColor[] { SKColor.Parse("ff8daa"), SKColor.Parse("fdaeae"), SKColor.Parse("f6e2b3"), SKColor.Parse("b49982"), SKColor.Parse("7e6651") };
         public static SKColor[] Seaweed = new SKColor[] { SKColor.Parse("0B7B8B"), SKColor.Parse("20B0AA"), SKColor.Parse("9EE2BE"), SKColor.Parse("6EBB7F"), SKColor.Parse("4A9A64") };
+        public static SKColor[] BlackAndWhite = new SKColor[] { SKColors.Black, SKColors.White };
+    }
+
+    public class CosinePalette
+    {
+        Vector3 a, b, c, d;
+
+        public CosinePalette(Vector3 a, Vector3 b, Vector3 c, Vector3 d)
+        {
+            this.a = a;
+            this.b = b;
+            this.c = c;
+            this.d = d;
+        }
+
+        public SKColor GetColor(float t)
+        {
+            Vector3 result = ((c * t) + d) * (float)Math.PI * 2;
+
+            result = new Vector3((float)Math.Cos(result.X), (float)Math.Cos(result.Y), (float)Math.Cos(result.Z));
+
+            result =  a + (b * result);
+
+            return new SKColor((byte)(result.X * 255), (byte)(result.Y * 255), (byte)(result.Z * 255));
+        }
     }
 }

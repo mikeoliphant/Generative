@@ -20,7 +20,8 @@ namespace Generative
         //FlowPainter drawing = new FlowPainter();
         //ColorSubdivisions drawing = new ColorSubdivisions();
         //Canvasify drawing = new Canvasify();
-        Noodling drawing = new Noodling();
+        //Noodling drawing = new Noodling();
+        TieDie drawing = new TieDie();
 
         public MainWindow()
         {

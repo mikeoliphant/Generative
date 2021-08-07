@@ -6,7 +6,7 @@ namespace Generative
     public class Noodling : BoundsPainter
     {
         LibNoise.Primitive.SimplexPerlin perlin = new LibNoise.Primitive.SimplexPerlin();
-        SKColor[] colors = Palette.Sunset;
+        SKColor[] colors = Palette.BlackAndWhite;
 
         SKPaint paint = new SKPaint
         {
@@ -24,9 +24,9 @@ namespace Generative
         {
             perlin.Seed = Random.Next(int.MaxValue);
 
-            Canvas.Clear(SKColors.AntiqueWhite);
+            //Canvas.Clear(SKColors.AntiqueWhite);
 
-            int numRings = 225 + Random.Next(colors.Length);
+            int numRings = 140 + Random.Next(colors.Length);
 
             float startRadiusX = bounds.Width * 0.01f;
             float startRadiusY = bounds.Height * 0.01f;
@@ -36,12 +36,12 @@ namespace Generative
 
             float scale = 1;
 
-            //int drawRings = (int)(0.75f * numRings);
-            int drawRings = numRings - (colors.Length * 2);
+            int drawRings = 0; // (int)(0.75f * numRings);
+            //int drawRings = numRings - (colors.Length * 2);
 
             for (int i = 0; i < numRings; i++)
             {
-                if (i > drawRings)
+                if (i >= drawRings)
                 {
                     paint.Color = colors[i % colors.Length];
 
@@ -58,7 +58,7 @@ namespace Generative
 
                 ringPath = PathUtils.NoisifyPath(ringPath, perlin, 1, 10000, 0, 0.02f);
 
-                scale += 0.15f;
+                scale += 0.3f;
                 
                 ringPath.Transform(SKMatrix.CreateScale(scale, scale, bounds.MidX, bounds.MidY));
             }
