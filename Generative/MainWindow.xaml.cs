@@ -21,7 +21,8 @@ namespace Generative
         //ColorSubdivisions drawing = new ColorSubdivisions();
         //Canvasify drawing = new Canvasify();
         //Noodling drawing = new Noodling();
-        TieDye drawing = new TieDye();
+        //TieDye drawing = new TieDye();
+        SolarCorruption drawing = new SolarCorruption();
 
         public MainWindow()
         {

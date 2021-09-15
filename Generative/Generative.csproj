@@ -97,6 +97,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="SolarCorruption.cs" />
     <Compile Include="TieDye.cs" />
     <Compile Include="Noodling.cs" />
     <Compile Include="ImageUtil.cs" />
