@@ -40,7 +40,7 @@ namespace Generative
 
         public override void Paint(SKRect bounds)
         {
-            //Canvas.Clear(new SKColor(250, 250, 250));
+            Canvas.Clear(new SKColor(200, 50, 50));
 
             float size = Math.Min(bounds.Width, bounds.Height);
 

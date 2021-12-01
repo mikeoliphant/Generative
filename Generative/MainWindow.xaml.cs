@@ -22,7 +22,8 @@ namespace Generative
         //Canvasify drawing = new Canvasify();
         //Noodling drawing = new Noodling();
         //TieDye drawing = new TieDye();
-        SolarCorruption drawing = new SolarCorruption();
+        //SolarCorruption drawing = new SolarCorruption();
+        Clifford drawing = new Clifford();
 
         public MainWindow()
         {
@@ -41,8 +42,17 @@ namespace Generative
             //drawing.SavePng(@"c:\tmp\test.png", (int)Width, (int)Height);
         }
 
+        bool skipFirst = true;
+
         private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
 		{
+            if (skipFirst)
+            {
+                skipFirst = false;
+
+                return;
+            }
+
 			SKCanvas canvas = e.Surface.Canvas;
 
 			float scale = (float)PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice.M11;
