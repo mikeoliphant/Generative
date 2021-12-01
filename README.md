@@ -30,6 +30,17 @@ Perlin noise flow field tendrils emenating from a circle.
   <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/SolarCorruption2.png" width="400" /> 
 </p>
 
+# [Clifford Attractors](https://github.com/mikeoliphant/Generative/blob/master/Generative/Clifford.cs)
+
+Clifford attractors using velocity for coloring.
+
+<p float="left">
+  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/CliffordJellyfish.png" width="400" />
+  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/CliffordMarble.png" width="400" /> 
+  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/CliffordCircleSwirl.png" width="400" />
+  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/CliffordBasket.png" width="400" />
+</p>
+
 # [Flow Painter](https://github.com/mikeoliphant/Generative/blob/master/Generative/FlowPainter.cs)
 
 Brush strokes following a Perlin noise flow field with colors sampled from an image.
