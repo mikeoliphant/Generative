@@ -1,9 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Numerics;
 using SkiaSharp;
 
 namespace Generative
 {
+    public static class Vector3Extensions
+    {
+        public static SKColor ToSKColor(this Vector3 vector)
+        {
+            return new SKColor((byte)(vector.X * 255), (byte)(vector.Y * 255), (byte)(vector.Z * 255));
+        }
+    }
+
     public static class Palette
     {
         public static SKColor[] RGBY = new SKColor[] { SKColors.Yellow, SKColors.Red, SKColors.Green, SKColors.Blue };
@@ -44,6 +53,73 @@ namespace Generative
             result =  a + (b * result);
 
             return new SKColor((byte)(result.X * 255), (byte)(result.Y * 255), (byte)(result.Z * 255));
+        }
+    }
+
+    public class GradientPalette : List<KeyValuePair<float, Vector3>>
+    {
+        public static GradientPalette RedYellowGreen
+        {
+            get
+            {
+                GradientPalette palette = new GradientPalette();
+                palette.Add(new System.Collections.Generic.KeyValuePair<float, Vector3>(0, new Vector3(1, 0.3f, 0.3f)));
+                palette.Add(new System.Collections.Generic.KeyValuePair<float, Vector3>(0.5f, new Vector3(1, 0.75f, 0.3f)));
+                palette.Add(new System.Collections.Generic.KeyValuePair<float, Vector3>(1, new Vector3(0.25f, 0.5f, 0.3f)));
+
+                return palette;
+            }
+        }
+
+        public static GradientPalette RedYellowGreenDark
+        {
+            get
+            {
+                float dark = 0.65f;
+
+                GradientPalette palette = new GradientPalette();
+                palette.Add(new System.Collections.Generic.KeyValuePair<float, Vector3>(0, new Vector3(1, 0, 0) * dark));
+                palette.Add(new System.Collections.Generic.KeyValuePair<float, Vector3>(0.5f, new Vector3(1, 0.75f, 0) * dark));
+                palette.Add(new System.Collections.Generic.KeyValuePair<float, Vector3>(1, new Vector3(0.25f, 0.5f, 0) * dark));
+
+                return palette;
+            }
+        }
+
+
+        public Vector3 GetGradientValue(float gradient)
+        {
+            int startPos = -1;
+            int endPos = -1;
+
+            int pos = 0;
+
+            foreach (KeyValuePair<float, Vector3> point in this)
+            {
+                if (point.Key > gradient)
+                {
+                    endPos = pos;
+
+                    break;
+                }
+
+                startPos = pos;
+
+                pos++;
+            }
+
+            if (startPos == -1)
+            {
+                return this[endPos].Value;
+            }
+            else if (endPos == -1)
+            {
+                return this[startPos].Value;
+            }
+
+            float lerp = (gradient - this[startPos].Key) / (this[endPos].Key - this[startPos].Key);
+
+            return Vector3.Lerp(this[startPos].Value, this[endPos].Value, lerp);
         }
     }
 }

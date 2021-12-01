@@ -23,14 +23,16 @@ namespace Generative
         //Noodling drawing = new Noodling();
         //TieDye drawing = new TieDye();
         //SolarCorruption drawing = new SolarCorruption();
-        Clifford drawing = new Clifford();
+        Clifford drawing = Clifford.Jellyfish;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            Height = 800;
-            Width = 800 * drawing.DesiredAspectRatio;
+            double size = 800;
+
+            Height = size;
+            Width = size * drawing.DesiredAspectRatio;
 
             SkiaCanvas.Focus();
 
@@ -39,7 +41,7 @@ namespace Generative
             //    drawing.SavePng(@"c:\tmp\test" + i + ".png", (int)Width, (int)Height);
             //}
 
-            //drawing.SavePng(@"c:\tmp\test.png", (int)Width, (int)Height);
+            drawing.SavePng(@"c:\tmp\test.png", (int)Width, (int)Height);
         }
 
         bool skipFirst = true;

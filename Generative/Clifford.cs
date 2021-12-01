@@ -7,22 +7,49 @@ namespace Generative
 {
     public class Clifford : BoundsPainter
     {
-        const int Iterations = 10000000;
+        int Iterations = 10000000;
 
-        const double a = -1.22;// 2;
-        const double b = 1.35; //2;
-        const double c = -1.25; //1;
-        const double d = -1.15; //-1;
+        double a = -1.22;// 2;
+        double b = 1.35; //2;
+        double c = -1.25; //1;
+        double d = -1.15; //-1;
 
-        CosinePalette cosinePalette = new CosinePalette(new Vector3(0.5f, 0.5f, 0.5f), new Vector3(0.5f, 0.5f, 0.5f), new Vector3(1.0f, 1.0f, 1.0f), new Vector3(0.00f, 0.10f, 0.20f));
+        GradientPalette palette = GradientPalette.RedYellowGreen;
+
+        SKPaint paint = new SKPaint
+        {
+            Color = SKColors.Black,
+            IsAntialias = false
+        };
+
+        SKColor backgroundColor = SKColors.White;
+
+        double scale = 0.2f;
+
+        public static Clifford Jellyfish { get { return new Clifford(-1.22, 1.35, -1.25, -1.15, 0.2, GradientPalette.RedYellowGreenDark, new SKColor(255, 250, 245)); } }
+        public static Clifford Marble { get { return new Clifford(2, 2, 1, -1, 0.2, GradientPalette.RedYellowGreen, SKColors.Black); } }
+        public static Clifford Basket { get { return new Clifford(1.7, 1.7, 0.6, 1.2, 0.2, GradientPalette.RedYellowGreenDark, SKColors.White); } }
+        public static Clifford CircleSwirl { get { return new Clifford(-1.24, -1.25, -1.82, -1.91, 0.15, GradientPalette.RedYellowGreenDark, SKColors.White); } }
 
         public Clifford()
         {
         }
 
+        public Clifford(double a, double b, double c, double d, double scale,  GradientPalette palette, SKColor backgroundColor)
+        {
+            this.a = a;
+            this.b = b;
+            this.c = c;
+            this.d = d;
+
+            this.scale = scale;
+            this.palette = palette;
+            this.backgroundColor = backgroundColor;
+        }
+
         public override void Paint(SKRect bounds)
         {
-            Canvas.Clear(SKColors.White);
+            Canvas.Clear(backgroundColor);
 
             int histWidth = (int)bounds.Width;
             int histHeight = (int)bounds.Height;
@@ -30,8 +57,8 @@ namespace Generative
             int[,] pointHistogram = new int[histWidth + 1, histHeight + 1];
             double[,] deltaHistogram = new double[histWidth + 1, histHeight + 1];
 
-            double xScale = 0.2 * histWidth;
-            double yScale = 0.2 * histHeight;
+            double xScale = scale * histWidth;
+            double yScale = scale * histHeight;
 
             int xOffset = histWidth / 2;
             int yOffset = histHeight / 2;
@@ -103,9 +130,9 @@ namespace Generative
 
                         alpha = (float)Math.Pow(alpha, 0.25);
 
-                        SKColor color = cosinePalette.GetColor(0.3f + ((float)(deltaHistogram[xPos, yPos] / maxDelta) * 0.3f));
+                        paint.Color = (palette.GetGradientValue((float)(deltaHistogram[xPos, yPos] / maxDelta))).ToSKColor().WithAlpha((byte)(alpha * 255));
 
-                        Canvas.DrawPoint(new SKPoint(xPos, yPos), new SKColor(color.Red, color.Green, color.Blue, (byte)(alpha * 255)));
+                        Canvas.DrawPoint(new SKPoint(xPos, yPos), paint);
                     }
                 }
             }
