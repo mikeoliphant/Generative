@@ -21,6 +21,15 @@ Tendril lines "injected" from the edges of the image and then following the path
   <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/Tendrils2.png" width="400" /> 
 </p>
 
+# [Solar Corruption](https://github.com/mikeoliphant/Generative/blob/master/Generative/SolarCorruption.cs)
+
+Perlin noise flow field tendrils emenating from a circle.
+
+<p float="left">
+  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/SolarCorruption.png" width="400" />
+  <img src="https://github.com/mikeoliphant/Generative/blob/master/Renders/SolarCorruption2.png" width="400" /> 
+</p>
+
 # [Flow Painter](https://github.com/mikeoliphant/Generative/blob/master/Generative/FlowPainter.cs)
 
 Brush strokes following a Perlin noise flow field with colors sampled from an image.
