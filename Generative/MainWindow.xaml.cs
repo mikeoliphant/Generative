@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.IO;
 using System.Windows;
 using SkiaSharp;
 using SkiaSharp.Views.Desktop;
@@ -10,6 +11,7 @@ namespace Generative
     /// </summary>
     public partial class MainWindow : Window
     {
+        
         //StainedGlass drawing = new StainedGlass();
         //Impressionist drawing = new Impressionist();
         //Ribbons drawing = new Ribbons();
@@ -23,39 +25,40 @@ namespace Generative
         //Noodling drawing = new Noodling();
         //TieDye drawing = new TieDye();
         //SolarCorruption drawing = new SolarCorruption();
-        Clifford drawing = Clifford.Jellyfish;
+
 
         public MainWindow()
         {
             InitializeComponent();
+            CreateDefaultPainers();
+            combox.DataContext = this.PainerList;
+            //double size = 800;
 
-            double size = 800;
+            //Height = size;
+            //Width = size * drawing.DesiredAspectRatio;
 
-            Height = size;
-            Width = size * drawing.DesiredAspectRatio;
+            //SkiaCanvas.Focus();
 
-            SkiaCanvas.Focus();
+            ////for (int i = 0; i < 10; i++)
+            ////{
+            ////    drawing.SavePng(@"c:\tmp\test" + i + ".png", (int)Width, (int)Height);
+            ////}
 
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    drawing.SavePng(@"c:\tmp\test" + i + ".png", (int)Width, (int)Height);
-            //}
-
-            drawing.SavePng(@"c:\tmp\test.png", (int)Width, (int)Height);
+            //drawing.SavePng(GetPath("test.png"), (int)Width, (int)Height);
         }
 
         bool skipFirst = true;
+        
 
         private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
 		{
-            if (skipFirst)
+            if (skipFirst || Painter == null)
             {
                 skipFirst = false;
 
                 return;
             }
-
-			SKCanvas canvas = e.Surface.Canvas;
+            SKCanvas canvas = e.Surface.Canvas;
 
 			float scale = (float)PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice.M11;
 			SKSize scaledSize = new SKSize(e.Info.Width / scale, e.Info.Height / scale);
@@ -63,11 +66,21 @@ namespace Generative
 			canvas.Scale(scale);
 
             canvas.Clear(SKColors.White);
+            try
+            {
+                var drawer = Painter.Value;
+                drawer.RandomSeed = (int)(DateTime.Now.Ticks % uint.MaxValue);
 
-            drawing.RandomSeed = (int)(DateTime.Now.Ticks % uint.MaxValue);
-
-            drawing.SetCanvas(canvas);
-            drawing.Paint(new SKRect(0, 0, scaledSize.Width, scaledSize.Height));
+                drawer.SetCanvas(canvas);
+                drawer.Paint(new SKRect(0, 0, scaledSize.Width, scaledSize.Height));
+            }
+            catch(Exception ex)
+            {
+                Task.Run(() =>
+                {
+                    MessageBox.Show(ex.ToString());
+                });
+            }
         }
 
         private void SKElement_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -79,5 +92,60 @@ namespace Generative
                     break;
             }
         }
+
+        private string GetPath(string fileName)
+        {
+            var tempDir = Path.GetTempPath();
+            var targetDir = Path.Combine(tempDir, "GenerativeWPF");
+            if (!Directory.Exists(targetDir))
+            {
+                Directory.CreateDirectory(targetDir);
+            }
+            var filePath = Path.Combine(targetDir, fileName);
+            return filePath;
+        }
+
+
+        public IEnumerable<KeyValuePair<Type,Lazy<BoundsPainter>>> PainerList { get; private set; }
+
+        public void CreateDefaultPainers()
+        {
+            var list = new List<KeyValuePair<Type, Lazy<BoundsPainter>>>()
+            {
+                new KeyValuePair<Type, Lazy<BoundsPainter>>( typeof(StainedGlass), new Lazy<BoundsPainter>(()=>new StainedGlass())),
+                //new Impressionist(),
+                new KeyValuePair<Type, Lazy<BoundsPainter>>( typeof(Ribbons), new Lazy<BoundsPainter>(()=>new Ribbons())),
+                new KeyValuePair<Type, Lazy<BoundsPainter>>( typeof(BrokenCircle), new Lazy<BoundsPainter>(()=>new BrokenCircle())),
+                new KeyValuePair<Type, Lazy<BoundsPainter>>( typeof(Threads), new Lazy<BoundsPainter>(()=>new Threads())),
+                new KeyValuePair<Type, Lazy<BoundsPainter>>( typeof(Hair), new Lazy<BoundsPainter>(()=>new Hair())),
+                new KeyValuePair<Type, Lazy<BoundsPainter>>( typeof(Tendrils), new Lazy<BoundsPainter>(()=>new Tendrils())),
+                //new FlowPainter(),
+                //new ColorSubdivisions(),
+                //new Canvasify(),
+                new KeyValuePair<Type, Lazy<BoundsPainter>>( typeof(Noodling), new Lazy<BoundsPainter>(()=>new Noodling())),
+                new KeyValuePair<Type, Lazy<BoundsPainter>>( typeof(TieDye), new Lazy<BoundsPainter>(()=>new TieDye())),
+                new KeyValuePair<Type, Lazy<BoundsPainter>>( typeof(SolarCorruption), new Lazy<BoundsPainter>(()=>new SolarCorruption())),
+                new KeyValuePair<Type, Lazy<BoundsPainter>>( typeof(Clifford), new Lazy<BoundsPainter>(()=>Clifford.Jellyfish))
+            };
+            this.PainerList = list;
+        }
+
+        private Lazy<BoundsPainter> _painter;
+        public Lazy<BoundsPainter> Painter
+        {
+            get => this._painter;
+            set
+            {
+                this._painter = value;
+                this.RePaint();
+            }
+        }
+
+        public void RePaint()
+        {
+            SkiaCanvas.InvalidateVisual();
+        }
+
+        
     }
 }

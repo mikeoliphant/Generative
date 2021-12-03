@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using SkiaSharp;
 
@@ -12,9 +13,9 @@ namespace Generative
         {
             SKBitmap bitmap = null;
 
-            using (WebClient webClient = new WebClient())
+            using (var httpClient = new HttpClient())
             {
-                bitmap = SKBitmap.Decode(webClient.DownloadData(url));
+                bitmap = SKBitmap.Decode(httpClient.GetByteArrayAsync(url).ConfigureAwait(false).GetAwaiter().GetResult());
             }
 
             return bitmap;
