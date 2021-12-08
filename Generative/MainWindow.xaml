@@ -1,4 +1,4 @@
-﻿<Window x:Class="Generative.MainWindow"
+<Window x:Class="Generative.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,8 +6,19 @@
         xmlns:local="clr-namespace:Generative"
         xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="800">
+        Title="MainWindow" Height="800" Width="800" x:Name="wind">
     <Grid>
-        <skia:SKElement x:Name="SkiaCanvas" PaintSurface="OnPaintSurface" Focusable="True" KeyDown="SKElement_KeyDown" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="True" HorizontalAlignment="Stretch">
+            <Button DockPanel.Dock="Right" Width="100">Save</Button>
+            <ComboBox HorizontalAlignment="Stretch" VerticalContentAlignment="Center" x:Name="combox" Grid.ColumnSpan="2"
+                  ItemsSource="{Binding .}" DisplayMemberPath="Key" SelectedValuePath="Value" SelectedValue="{Binding ElementName=wind, Path=Painter}" SelectedIndex="0">
+            </ComboBox>
+        </DockPanel>
+        
+        <skia:SKElement Grid.Row="1" x:Name="SkiaCanvas" PaintSurface="OnPaintSurface" Focusable="True" KeyDown="SKElement_KeyDown" Grid.ColumnSpan="2" />
     </Grid>
 </Window>
