@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using SkiaSharp;
+using Generative;
 
-namespace Generative
+namespace ExampleBrowser
 {
     public class FlowPainter : BoundsPainter
     {
@@ -12,7 +13,7 @@ namespace Generative
 
         public FlowPainter()
         {
-            //colorBitmap = ImageUtil.BitmapFromURL("https://pbs.twimg.com/profile_images/1474838354/KungFu128x128_400x400.png");
+            //colorBitmap = ImageUtil.BitmapFromURL("https://avatars.githubusercontent.com/u/6710799?v=4");
             //colorBitmap = ImageUtil.BitmapFromURL("https://media.istockphoto.com/photos/beautiful-sunset-over-the-tropical-sea-picture-id1172427455?k=6&m=1172427455&s=612x612&w=0&h=yGHpsUyZTE15UPI2pRTkDUnZzLAciyV6Sl2Ieh2QMW4=");
             //colorBitmap = ImageUtil.BitmapFromURL("https://i2.wp.com/digital-photography-school.com/wp-content/uploads/2021/03/sunset-photography-tips-1.jpg?resize=1500%2C1000&ssl=1");
             //colorBitmap = ImageUtil.BitmapFromURL("https://cdnb.artstation.com/p/assets/images/images/018/511/569/large/ben-j-pastoral.jpg?1559660489");
@@ -36,7 +37,6 @@ namespace Generative
 
             DesiredAspectRatio = (float)colorBitmap.Width / (float)colorBitmap.Height;
         }
-
         
         public override void Paint(SKRect bounds)
         {

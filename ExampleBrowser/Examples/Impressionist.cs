@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using SkiaSharp;
+using Generative;
 
-namespace Generative
+namespace ExampleBrowser
 {
     public class Impressionist : BoundsPainter
     {
@@ -11,9 +12,9 @@ namespace Generative
 
         public Impressionist()
         {
-            bitmap = ImageUtil.BitmapFromURL("https://pbs.twimg.com/profile_images/1474838354/KungFu128x128_400x400.png");
+            bitmap = ImageUtil.BitmapFromURL("https://avatars.githubusercontent.com/u/6710799?v=4");
 
-            brushBitmap = ImageUtil.BitmapFromResource("Generative.Images.Brush.png");
+            brushBitmap = ImageUtil.BitmapFromResource("ExampleBrowser.Images.Brush.png");
 
             int maxSize = 512;
 
@@ -28,6 +29,8 @@ namespace Generative
             }
 
             bitmapDensity = ImageUtil.GetBitmapDensity(bitmap);
+
+            DesiredAspectRatio = (float)bitmap.Width / (float)bitmap.Height;
         }
 
         public override void Paint(SKRect bounds)

@@ -1,16 +1,14 @@
 <Project Sdk="Microsoft.Net.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <PropertyGroup>
     <Copyright>Copyright ©  2021</Copyright>
+    <ApplicationIcon />
+    <StartupObject />
   </PropertyGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Images\Brush.png" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="LibNoise" Version="0.2.0" />
     <PackageReference Include="OpenTK" Version="5.0.0-pre.6" />

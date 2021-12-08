@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using SkiaSharp;
+using Generative;
 
-namespace Generative
+namespace ExampleBrowser
 {
     public class StainedGlass : BoundsPainter
     {

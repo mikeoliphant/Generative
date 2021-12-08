@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Numerics;
 using System.Threading;
 using SkiaSharp;
+using Generative;
 
-namespace Generative
+namespace ExampleBrowser
 {
     public class Clifford : BoundsPainter
     {

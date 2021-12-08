@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using SkiaSharp;
+using Generative;
 
-namespace Generative
+namespace ExampleBrowser
 {
     public class ColorSubdivisions : BoundsPainter
     {

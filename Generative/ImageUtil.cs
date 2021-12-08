@@ -13,9 +13,16 @@ namespace Generative
         {
             SKBitmap bitmap = null;
 
-            using (var httpClient = new HttpClient())
+            using (HttpClient httpClient = new HttpClient())
             {
-                bitmap = SKBitmap.Decode(httpClient.GetByteArrayAsync(url).ConfigureAwait(false).GetAwaiter().GetResult());
+                try
+                {
+                    bitmap = SKBitmap.Decode(httpClient.GetByteArrayAsync(url).ConfigureAwait(false).GetAwaiter().GetResult());
+                }
+                catch
+                {
+                    throw new ArgumentException("Unable to load bitmap from \"" + url + "\"");
+                }
             }
 
             return bitmap;
@@ -25,7 +32,7 @@ namespace Generative
         {
             SKBitmap bitmap = null;
 
-            Assembly assembly = Assembly.GetExecutingAssembly();
+            Assembly assembly = Assembly.GetEntryAssembly();
 
             using (Stream stream = assembly.GetManifestResourceStream(resourceID))
             {

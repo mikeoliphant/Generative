@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Numerics;
 using SkiaSharp;
+using Generative;
 
-namespace Generative
+namespace ExampleBrowser
 {
-    public class SolarCorruption : BoundsPainter
+    public class TieDye : BoundsPainter
     {
         public float NoiseXOffset { get; set; }
         public float NoiseYOffset { get; set; }
@@ -12,26 +13,19 @@ namespace Generative
 
         LibNoise.Primitive.SimplexPerlin perlin = new LibNoise.Primitive.SimplexPerlin();
         SKColor[] colors = Palette.Vibrant;
+        int numSegments = 200;
+        float lineLength = 1f;
         CosinePalette cosinePalette = new CosinePalette(new Vector3(0.5f, 0.5f, 0.5f), new Vector3(0.5f, 0.5f, 0.5f), new Vector3(1.0f, 1.0f, 1.0f), new Vector3(0.00f, 0.33f, 0.67f));
-        byte colorAlpha = 20;
 
         SKPaint paint = new SKPaint
         {
-            Color = SKColors.Black, // SKColors.Orange,
+            Color = SKColors.Black,
             IsAntialias = true,
             Style = SKPaintStyle.Stroke,
             StrokeWidth = 1
         };
 
-        SKPaint circlePaint = new SKPaint
-        {
-            Color = new SKColor(255, 255, 245),
-            IsAntialias = true,
-            Style = SKPaintStyle.StrokeAndFill,
-            StrokeWidth = 1
-        };
-
-        public SolarCorruption()
+        public TieDye()
         {
             NoiseXOffset = 0;
             NoiseYOffset = 0;
@@ -40,44 +34,32 @@ namespace Generative
 
         public override void Paint(SKRect bounds)
         {
-            Canvas.Clear(new SKColor(200, 50, 50));
-
-            float size = Math.Min(bounds.Width, bounds.Height);
-
-            float left = bounds.Left + ((bounds.Width - size) / 2);
-            float top = bounds.Top + ((bounds.Height - size) / 2);
-
-            bounds = new SKRect(left, top, left + size, top + size);
-
             perlin.Seed = Random.Next(int.MaxValue);
 
-            float radiusPercent = 0.35f;
+            //noiseOffset = (float)random.NextDouble() * 0.1f;
 
-            SKPath path = new SKPath();
-            path.AddCircle(0.5f, 0.5f, radiusPercent);
+            //bounds = new SKRect(bounds.Left - (bounds.Width * 0.1f), bounds.Top - (bounds.Height * 0.1f), bounds.Right + (bounds.Width * 0.1f), bounds.Bottom + (bounds.Height * 0.1f));
 
-            Canvas.DrawCircle(bounds.MidX, bounds.MidY, size * radiusPercent, circlePaint);
+            paint.Color = new SKColor(0, 0, 0, 5);
 
-            SKPathMeasure pathMeasure = new SKPathMeasure(path);
+            int numLines = 1000;
 
-            paint.Color = new SKColor(paint.Color.Red, paint.Color.Green, paint.Color.Blue, colorAlpha);
-
-            int numLines = 5000;
-
-            float pathDelta = pathMeasure.Length / (float)numLines;
-            float pathDistance = 0;
+            float lineWidth = 1.0f / (float)numLines;
 
             for (int i = 0; i < numLines; i++)
             {
-                //SKColor color = cosinePalette.GetColor(perlin.GetValue(pathDistance * 100));
+                lineLength = (0.1f + (float)Random.NextDouble()) * 5;
 
-                //paint.Color = new SKColor(color.Red, color.Green, color.Blue, colorAlpha);
+                float lineStart = (float)Random.NextDouble();
 
-                SKPoint point = pathMeasure.GetPosition(pathDistance);
+                SKColor color = cosinePalette.GetColor(perlin.GetValue(lineStart));
 
-                DrawFlow(point.X, point.Y, bounds, 0.2f, 200);
+                paint.Color = new SKColor(color.Red, color.Green, color.Blue, 5);
 
-                pathDistance += pathDelta;
+                DrawFlow(lineStart, 0, bounds, lineLength, numSegments);
+                DrawFlow(1, lineStart, bounds, lineLength, numSegments);
+                DrawFlow(0, lineStart, bounds, lineLength, numSegments);
+                DrawFlow(lineStart, 1, bounds, lineLength, numSegments);
             }
         }
 
@@ -85,10 +67,10 @@ namespace Generative
         {
             SKPath flowPath;
 
-            flowPath = CreateFlowPath(startX, startY, bounds, length, numSegments, 1);
+            flowPath = CreateFlowPath(startX, startY, bounds, lineLength, numSegments, 1);
             Canvas.DrawPath(flowPath, paint);
 
-            flowPath = CreateFlowPath(startX, startY, bounds, length, numSegments, -1);
+            flowPath = CreateFlowPath(startX, startY, bounds, lineLength, numSegments, -1);
             Canvas.DrawPath(flowPath, paint);
         }
 

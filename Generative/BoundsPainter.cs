@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using SkiaSharp;
 
@@ -39,6 +39,8 @@ namespace Generative
 
         public void SavePng(string savePath, int width, int height)
         {
+            Random = new Random(randomSeed);
+
             SKBitmap bitmap = new SKBitmap(width, height);
 
             SKCanvas pngCanvas = new SKCanvas(bitmap);
