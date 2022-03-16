@@ -17,9 +17,8 @@ namespace ExampleBrowser
         {
             ExampleList = new List<GenerativeExample>
             {
-                new GenerativeExample(typeof(StainedGlass)),
-                new GenerativeExample(typeof(Impressionist)),
                 new GenerativeExample(typeof(Ribbons)),
+                new GenerativeExample(typeof(Impressionist)),
                 new GenerativeExample(typeof(Threads)),
                 new GenerativeExample(typeof(Hair)),
                 new GenerativeExample(typeof(Tendrils)),
@@ -31,6 +30,7 @@ namespace ExampleBrowser
                 new GenerativeExample(typeof(StainedGlass)),
                 new GenerativeExample(typeof(SolarCorruption)),
                 new GenerativeExample(typeof(Clifford)),
+                new GenerativeExample(typeof(FractalFlow)),
             };
         }
 

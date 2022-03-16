@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using SkiaSharp;
 
@@ -31,6 +33,13 @@ namespace Generative
         public void SetCanvas(SKCanvas canvas)
         {
             this.Canvas = canvas;
+        }
+
+        public virtual IEnumerable<bool> ProgressivePaint(SKRect bounds)
+        {
+            Paint(bounds);
+
+            yield return false;
         }
 
         public virtual void Paint(SKRect bounds)

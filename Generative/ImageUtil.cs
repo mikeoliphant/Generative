@@ -28,6 +28,25 @@ namespace Generative
             return bitmap;
         }
 
+        public static SKBitmap BitmapFromFile(string path)
+        {
+            SKBitmap bitmap = null;
+
+                try
+                {
+                    using (Stream bitmapStream = File.OpenRead(path))
+                    {
+                        bitmap = SKBitmap.Decode(bitmapStream);
+                    }
+                }
+                catch
+                {
+                    throw new ArgumentException("Unable to load bitmap from \"" + path + "\"");
+                }
+
+            return bitmap;
+        }
+
         public static SKBitmap BitmapFromResource(string resourceID)
         {
             SKBitmap bitmap = null;

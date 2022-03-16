@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExampleBrowser"
-        xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="800" x:Name="wind">
     <Grid>
@@ -16,10 +15,10 @@
             <Button DockPanel.Dock="Right" Width="100" Click="SaveButton_Click">Save</Button>
             <Button DockPanel.Dock="Right" Width="100" Click="ReDrawButton_Click">ReDraw</Button>
             <ComboBox HorizontalAlignment="Stretch" VerticalContentAlignment="Center" x:Name="combox" Grid.ColumnSpan="2"
-                  ItemsSource="{Binding .}" DisplayMemberPath="PainterType" SelectedValue="{Binding ElementName=wind, Path=Example}" SelectedIndex="0">
+                  ItemsSource="{Binding .}" DisplayMemberPath="PainterType" SelectedValue="{Binding ElementName=SkiaCanvas, Path=Example, Mode=OneWayToSource}" SelectedIndex="0">
             </ComboBox>
         </DockPanel>
 
-        <skia:SKElement Grid.Row="1" x:Name="SkiaCanvas" PaintSurface="OnPaintSurface" Focusable="True" Grid.ColumnSpan="2" />
+        <local:GenerativeElement Grid.Row="1" x:Name="SkiaCanvas" Focusable="True" Grid.ColumnSpan="2" />
     </Grid>
 </Window>
