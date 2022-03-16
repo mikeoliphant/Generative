@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using SkiaSharp;
 using Generative;
 
@@ -10,7 +11,7 @@ namespace ExampleBrowser
         float noiseScale = 1;
         SKColor[] colors = Palette.Pastel;
 
-        public override void Paint(SKRect bounds)
+        public override IEnumerable<bool> ProgressivePaint(SKRect bounds)
         {
             perlin.Seed = Random.Next(int.MaxValue);
 
@@ -29,6 +30,9 @@ namespace ExampleBrowser
 
             for (int i = 0; i < numFlows; i++)
             {
+                if ((i % 100) == 0)
+                    yield return true;
+
                 float x = (float)Random.NextDouble();
                 float y = (float)Random.NextDouble();
 

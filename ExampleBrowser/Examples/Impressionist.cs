@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using SkiaSharp;
 using Generative;
 
@@ -12,36 +13,49 @@ namespace ExampleBrowser
 
         public Impressionist()
         {
-            bitmap = ImageUtil.BitmapFromURL("https://avatars.githubusercontent.com/u/6710799?v=4");
-
-            brushBitmap = ImageUtil.BitmapFromResource("ExampleBrowser.Images.Brush.png");
-
-            int maxSize = 512;
-
-            if ((bitmap.Width > maxSize) || (bitmap.Height > maxSize))
-            {
-                float xScale = (float)maxSize / (float)bitmap.Width;
-                float yScale = (float)maxSize / (float)bitmap.Height;
-
-                float scale = Math.Min(xScale, yScale);
-
-                bitmap = bitmap.Resize(new SKImageInfo((int)(bitmap.Width * scale), (int)(bitmap.Height * scale)), SKFilterQuality.High);
-            }
-
-            bitmapDensity = ImageUtil.GetBitmapDensity(bitmap);
-
-            DesiredAspectRatio = (float)bitmap.Width / (float)bitmap.Height;
         }
 
-        public override void Paint(SKRect bounds)
+        public override IEnumerable<bool> ProgressivePaint(SKRect bounds)
         {
+            yield return true;
+
+            if (bitmap == null)
+            {
+                bitmap = ImageUtil.BitmapFromURL("https://avatars.githubusercontent.com/u/6710799?v=4");
+
+                brushBitmap = ImageUtil.BitmapFromResource("ExampleBrowser.Images.Brush.png");
+
+                int maxSize = 512;
+
+                if ((bitmap.Width > maxSize) || (bitmap.Height > maxSize))
+                {
+                    float xScale = (float)maxSize / (float)bitmap.Width;
+                    float yScale = (float)maxSize / (float)bitmap.Height;
+
+                    float scale = Math.Min(xScale, yScale);
+
+                    bitmap = bitmap.Resize(new SKImageInfo((int)(bitmap.Width * scale), (int)(bitmap.Height * scale)), SKFilterQuality.High);
+                }
+
+                bitmapDensity = ImageUtil.GetBitmapDensity(bitmap);
+
+                DesiredAspectRatio = (float)bitmap.Width / (float)bitmap.Height;
+            }
+
+            yield return true;
+
             int alpha = 128;
 
             DrawDots(10, 128, 10000, 255, bounds);
+            yield return true;
             DrawDots(100, 32, 10000, 255, bounds);
+            yield return true;
             DrawDots(1000, 16, 10000, 255, bounds);
+            yield return true;
             DrawDots(10000, 8, 10000, alpha, bounds);
+            yield return true;
             DrawDots(100000, 0, 8, alpha, bounds, useTexture: true);
+            yield return true;
         }
 
         public void DrawDots(int numDots, float minRadius, float maxRadius, int alpha, SKRect bounds)

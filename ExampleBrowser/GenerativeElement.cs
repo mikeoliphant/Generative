@@ -20,6 +20,7 @@ namespace ExampleBrowser
         private readonly bool designMode;
 
         private WriteableBitmap bitmap;
+        private SKSurface surface;
         private bool ignorePixelScaling;
 
         GenerativeExample example;
@@ -40,7 +41,7 @@ namespace ExampleBrowser
             {
                 ignorePixelScaling = value;
 
-                RePaint();
+                UpdatePaint();
             }
         }
 
@@ -58,10 +59,25 @@ namespace ExampleBrowser
                     Width = desiredWidth;
                 }
 
-                RePaint();
+                paintEnumerator = null;
+                UpdatePaint();
             }
         }
 
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+
+            CompositionTarget.Rendering += CompositionTarget_Rendering;
+        }
+
+        private void CompositionTarget_Rendering(object sender, EventArgs e)
+        {
+            if (paintEnumerator != null)
+            {
+                UpdatePaint();
+            }
+        }
 
         protected override void OnRender(DrawingContext drawingContext)
         {
@@ -89,6 +105,10 @@ namespace ExampleBrowser
                 needRePaint = true;
 
                 bitmap = new WriteableBitmap(info.Width, size.Height, BitmapDpi * scaleX, BitmapDpi * scaleY, PixelFormats.Pbgra32, null);
+
+                surface = SKSurface.Create(info, bitmap.BackBuffer, bitmap.BackBufferStride);
+
+                paintEnumerator = null;
             }
 
             if (needRePaint)
@@ -97,17 +117,14 @@ namespace ExampleBrowser
 
                 // draw on the bitmap
                 bitmap.Lock();
-                using (var surface = SKSurface.Create(info, bitmap.BackBuffer, bitmap.BackBufferStride))
+                if (IgnorePixelScaling)
                 {
-                    if (IgnorePixelScaling)
-                    {
-                        var canvas = surface.Canvas;
-                        canvas.Scale(scaleX, scaleY);
-                        canvas.Save();
-                    }
-
-                    PaintSurface(surface, info.WithSize(userVisibleSize));
+                    var canvas = surface.Canvas;
+                    canvas.Scale(scaleX, scaleY);
+                    canvas.Save();
                 }
+
+                PaintSurface(surface, info.WithSize(userVisibleSize));
 
                 // draw the bitmap to the screen
                 bitmap.AddDirtyRect(new Int32Rect(0, 0, info.Width, size.Height));
@@ -122,15 +139,16 @@ namespace ExampleBrowser
             if (Example == null)
                 return;
 
-            SKCanvas canvas = surface.Canvas;
-
-            canvas.Clear(SKColors.White);
-
             try
             {
                 if (paintEnumerator == null)
                 {
+                    SKCanvas canvas = surface.Canvas;
+
+                    canvas.Clear(SKColors.White);
+
                     BoundsPainter drawer = Example.Value;
+
                     drawer.RandomSeed = (int)(DateTime.Now.Ticks % uint.MaxValue);
 
                     drawer.SetCanvas(canvas);
@@ -142,13 +160,6 @@ namespace ExampleBrowser
                 {
                     if (paintEnumerator.MoveNext())
                     {
-                        if (paintEnumerator.Current)
-                        {
-                            //Dispatcher.Invoke(delegate
-                            //{
-                            //    SkiaCanvas.InvalidateVisual();
-                            //});
-                        }
                     }
                     else
                     {
@@ -173,11 +184,18 @@ namespace ExampleBrowser
             InvalidateVisual();
         }
 
-        public void RePaint()
+        public void UpdatePaint()
         {
             InvalidateVisual();
 
             needRePaint = true;
+        }
+
+        public void RePaint()
+        {
+            paintEnumerator = null;
+
+            UpdatePaint();
         }
 
         private SKSizeI CreateSize(out SKSizeI unscaledSize, out float scaleX, out float scaleY)

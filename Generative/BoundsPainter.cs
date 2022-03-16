@@ -35,6 +35,11 @@ namespace Generative
             this.Canvas = canvas;
         }
 
+        public virtual void PaintAll(SKRect bounds)
+        {
+            foreach (object obj in ProgressivePaint(bounds)) ;
+        }
+
         public virtual IEnumerable<bool> ProgressivePaint(SKRect bounds)
         {
             Paint(bounds);
@@ -57,7 +62,7 @@ namespace Generative
             pngCanvas.Clear(SKColors.White);
 
             SetCanvas(pngCanvas);
-            Paint(new SKRect(0, 0, width, height));
+            PaintAll(new SKRect(0, 0, width, height));
 
             pngCanvas.Flush();
 

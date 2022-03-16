@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 using SkiaSharp;
 using Generative;
@@ -39,7 +40,7 @@ namespace ExampleBrowser
             NoiseScale = 10;
         }
 
-        public override void Paint(SKRect bounds)
+        public override IEnumerable<bool> ProgressivePaint(SKRect bounds)
         {
             Canvas.Clear(new SKColor(200, 50, 50));
 
@@ -70,6 +71,9 @@ namespace ExampleBrowser
 
             for (int i = 0; i < numLines; i++)
             {
+                if ((i % 100) == 0)
+                    yield return true;
+
                 //SKColor color = cosinePalette.GetColor(perlin.GetValue(pathDistance * 100));
 
                 //paint.Color = new SKColor(color.Red, color.Green, color.Blue, colorAlpha);

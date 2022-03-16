@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using SkiaSharp;
 using Generative;
 
@@ -37,7 +38,7 @@ namespace ExampleBrowser
             DesiredAspectRatio = (float)colorBitmap.Width / (float)colorBitmap.Height;
         }
         
-        public override void Paint(SKRect bounds)
+        public override IEnumerable<bool> ProgressivePaint(SKRect bounds)
         {
             Canvas.DrawBitmap(colorBitmap, bounds);
 
@@ -51,10 +52,13 @@ namespace ExampleBrowser
                 StrokeCap = SKStrokeCap.Round
             };
 
-            int numFlows = 100000;
+            int numFlows = 50000;
 
             for (int i = 0; i < numFlows; i++)
             {
+                if ((i % 100) == 0)
+                    yield return true;
+
                 float x = (float)Random.NextDouble();
                 float y = (float)Random.NextDouble();
 
