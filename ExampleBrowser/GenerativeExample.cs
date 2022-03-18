@@ -31,6 +31,7 @@ namespace ExampleBrowser
                 new GenerativeExample(typeof(SolarCorruption)),
                 new GenerativeExample(typeof(Clifford)),
                 new GenerativeExample(typeof(FractalFlow)),
+                new GenerativeExample(typeof(PlantLSystem)),
             };
         }
 
