@@ -1,15 +1,10 @@
 <Project Sdk="Microsoft.Net.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-  <PropertyGroup>
-    <Copyright>Copyright ©  2021</Copyright>
-    <ApplicationIcon />
-    <StartupObject />
+    <TargetFramework>net8.0-windows</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="LibNoise" Version="0.2.0" />
+    <PackageReference Include="LibNoiseCore" Version="1.0.0" />
     <PackageReference Include="SkiaSharp" Version="3.119.0" />
   </ItemGroup>
 </Project>
