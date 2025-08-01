@@ -6,7 +6,6 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using SkiaSharp;
-using SkiaSharp.Views.Desktop;
 using Generative;
 
 namespace ExampleBrowser

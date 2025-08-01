@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
@@ -16,8 +16,7 @@
 
   <ItemGroup>
     <PackageReference Include="OpenTK" Version="5.0.0-pre.6" />
-    <PackageReference Include="OpenTK.GLControl" Version="3.1.0" />
-    <PackageReference Include="SkiaSharp.Views" Version="2.88.0-preview.155" />
+    <PackageReference Include="OpenTK.GLControl" Version="4.0.2" />
   </ItemGroup>
 
   <ItemGroup>

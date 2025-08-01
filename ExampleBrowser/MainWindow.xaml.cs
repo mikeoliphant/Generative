@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Win32;
 using SkiaSharp;
-using SkiaSharp.Views.Desktop;
 using Generative;
 
 namespace ExampleBrowser
