@@ -21,7 +21,8 @@ namespace ExampleBrowser
 
         public ColorSubdivisions()
         {
-            colorBitmap = ImageUtil.BitmapFromURL("https://cdn.lifestyleasia.com/wp-content/uploads/sites/3/2020/11/16190957/photo-1543349689-9a4d426bee8e-1243x900.jpeg");
+            colorBitmap = ImageUtil.BitmapFromURL("https://avatars.githubusercontent.com/u/6710799?v=4");
+            //colorBitmap = ImageUtil.BitmapFromURL("https://cdn.lifestyleasia.com/wp-content/uploads/sites/3/2020/11/16190957/photo-1543349689-9a4d426bee8e-1243x900.jpeg");
 
             int maxSize = 512;
 
